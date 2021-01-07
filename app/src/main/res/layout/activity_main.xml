@@ -11,12 +11,14 @@
         android:id="@+id/imageView"/>
 
     <Button
+        android:onClick="onClickBack"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="戻る"
         android:id="@+id/back_button"/>
 
     <Button
+        android:onClick="onClickStartOrPause"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="再生/停止"
@@ -24,6 +26,7 @@
 
 
     <Button
+        android:onClick="onClickNext"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="進む"
