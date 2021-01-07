@@ -8,19 +8,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import android.view.View;
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
-    private var pager: ViewPager? = null
-
-    private var adapter: FragmentPagerAdapter? = null
-
-    private var currentPage = 0
 
     private val PERMISSIONS_REQUEST_CODE = 100
 
@@ -56,21 +47,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        pager = (ViewPager) findViewById(R.id.pager);
-
-        adapter = new UserInfoViewPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(adapter);
-        currentPage = 0;
-    }
-
-    fun onClickNext(view: View?) {
-        currentPage++
-        pager.setCurrentItem(currentPage)
-    }
-
-    fun onClickBack(view: View?) {
-        currentPage--
-        pager.setCurrentItem(currentPage)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
