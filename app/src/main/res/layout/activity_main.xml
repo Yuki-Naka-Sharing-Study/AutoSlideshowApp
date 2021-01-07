@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="onClickBack"
+        android:text="戻る"/>
+
+    <Button
+        android:id="@+id/start_pause_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="onClickStartOrPause"
+        android:text="再生/停止"/>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="onClickNext"
+        android:text="進む"/>
+
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView"/>
-
-    <Button
-        android:onClick="onClickBack"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="戻る"
-        android:id="@+id/back_button"/>
-
-    <Button
-        android:onClick="onClickStartOrPause"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="再生/停止"
-        android:id="@+id/start_pause_button"/>
-
-
-    <Button
-        android:onClick="onClickNext"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="進む"
-        android:id="@+id/next_button"/>
+        android:visibility="visible"
+        tools:visibility="visible" />
 
 </LinearLayout>
 
