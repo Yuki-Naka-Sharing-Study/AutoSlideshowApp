@@ -1,4 +1,6 @@
 package jp.techacademy.yuki.naka.autoslideshowapp
 
-class SecondPageFragment {
+import androidx.fragment.app.Fragment
+
+class SecondPageFragment : Fragment() {
 }
