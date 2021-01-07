@@ -18,35 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        next_button.setOnClickListener {
-            // パーミッションの許可状態を確認する
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    // 許可されている
-                    Log.d("ANDROID", "許可されている")
-                } else {
-                    Log.d("ANDROID", "許可されていない")
-                    // 許可されていないので許可ダイアログを表示する
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_CODE)
-                }
-            }
-        }
-
-        back_button.setOnClickListener {
-            // パーミッションの許可状態を確認する
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    // 許可されている
-                    Log.d("ANDROID", "許可されている")
-                } else {
-                    Log.d("ANDROID", "許可されていない")
-                    // 許可されていないので許可ダイアログを表示する
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_CODE)
-                }
-            }
-        }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
