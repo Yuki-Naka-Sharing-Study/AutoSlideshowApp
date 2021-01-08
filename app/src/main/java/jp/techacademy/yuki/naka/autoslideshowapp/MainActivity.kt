@@ -1,13 +1,13 @@
 package jp.techacademy.yuki.naka.autoslideshowapp
 
 import android.Manifest
-import android.content.ContentUris
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import android.provider.MediaStore
+import android.content.ContentUris
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -18,6 +18,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        back_button.setOnClickListener {
+
+        }
+
+        next_button.setOnClickListener {
+
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -49,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 val id = cursor.getLong(fieldIndex)
                 val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
+                imageView.setImageURI(imageUri)
                 Log.d("ANDROID", "URI : " + imageUri.toString())
             } while (cursor.moveToNext())
         }
