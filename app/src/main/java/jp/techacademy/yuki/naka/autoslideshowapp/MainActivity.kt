@@ -15,6 +15,30 @@ class MainActivity : AppCompatActivity() {
 
     private val PERMISSIONS_REQUEST_CODE = 100
 
+    private fun getContentsInfo() {
+        // 画像の情報を取得する
+        val resolver = contentResolver
+        val cursor = resolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
+                null, // 項目（null = 全項目）
+                null, // フィルタ条件（null = フィルタなし）
+                null, // フィルタ用パラメータ
+                null // ソート (nullソートなし）
+        )
+
+        if (cursor!!.moveToFirst()) {
+            do {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = cursor.getLong(fieldIndex)
+                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                Log.d("ANDROID", "URI : " + imageUri.toString())
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,65 +58,22 @@ class MainActivity : AppCompatActivity() {
             getContentsInfo()
         }
 
-        fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-            when (requestCode) {
-                PERMISSIONS_REQUEST_CODE ->
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        getContentsInfo()
-                    }
-            }
-        }
-
         back_button.setOnClickListener {
-             fun getContentsInfo() {
-                // 画像の情報を取得する
-                val resolver = contentResolver
-                val cursor = resolver.query(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
-                        null, // 項目（null = 全項目）
-                        null, // フィルタ条件（null = フィルタなし）
-                        null, // フィルタ用パラメータ
-                        null // ソート (nullソートなし）
-                )
 
-                if (cursor!!.moveToFirst()) {
-                    do {
-                        // indexからIDを取得し、そのIDから画像のURIを取得する
-                        val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-                        val id = cursor.getLong(fieldIndex)
-                        val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
-                        Log.d("ANDROID", "URI : " + imageUri.toString())
-                    } while (cursor.moveToNext())
-                }
-                cursor.close()
-            }
         }
 
         next_button.setOnClickListener {
-             fun getContentsInfo() {
-                // 画像の情報を取得する
-                val resolver = contentResolver
-                val cursor = resolver.query(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
-                        null, // 項目（null = 全項目）
-                        null, // フィルタ条件（null = フィルタなし）
-                        null, // フィルタ用パラメータ
-                        null // ソート (nullソートなし）
-                )
 
-                if (cursor!!.moveToFirst()) {
-                    do {
-                        // indexからIDを取得し、そのIDから画像のURIを取得する
-                        val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-                        val id = cursor.getLong(fieldIndex)
-                        val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
-                        Log.d("ANDROID", "URI : " + imageUri.toString())
-                    } while (cursor.moveToNext())
-                }
-                cursor.close()
-            }
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSIONS_REQUEST_CODE ->
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getContentsInfo()
+                }
+        }
+    }
+
 }
