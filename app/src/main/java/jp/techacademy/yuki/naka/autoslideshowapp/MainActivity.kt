@@ -9,12 +9,20 @@ import android.util.Log
 import android.provider.MediaStore
 import android.content.ContentUris
 import android.database.Cursor
+import android.os.Handler
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private val PERMISSIONS_REQUEST_CODE = 100
     private var cursor: Cursor? = null
+    private var mTimer: Timer? = null
+
+    // タイマー用の時間のための変数
+    private var mTimerSec = 0.0
+
+    private var mHandler = Handler()
 
     fun getContentsInfo() {
         // 画像の情報を取得する
@@ -49,12 +57,27 @@ class MainActivity : AppCompatActivity() {
 
         back_button.setOnClickListener {
             if (cursor!!.moveToPrevious()) {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = cursor!!.getLong(fieldIndex)
+                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                imageView.setImageURI(imageUri)
             }
         }
 
+        start_pause_button.setOnClickListener {
+
+        }
 
         next_button.setOnClickListener {
             if (cursor!!.moveToNext()) {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = cursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = cursor!!.getLong(fieldIndex)
+                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                imageView.setImageURI(imageUri)
             }
         }
     }
