@@ -15,10 +15,11 @@ class MainActivity : AppCompatActivity() {
 
     private val PERMISSIONS_REQUEST_CODE = 100
     private var cursor: Cursor? = null
+
     fun getContentsInfo() {
         // 画像の情報を取得する
         val resolver = contentResolver
-        var cursor = resolver.query(
+        cursor = resolver.query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, // データの種類
                 null, // 項目（null = 全項目）
                 null, // フィルタ条件（null = フィルタなし）
